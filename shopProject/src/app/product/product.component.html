@@ -1,0 +1,12 @@
+
+    <div class="card" style="width: 15rem;">
+      <img class="card-img-top ImageSize" src="https://rishabh-images.s3.amazonaws.com/{{Product.imagePath}}" style="border-bottom:0.01px solid #dee2e6">
+      <div class="card-body">
+        <h5 class="card-title">{{ Product.title }}</h5>
+        <p class="card-text">{{ Product.price|currency }}</p>
+      </div>
+      <button type="button" (click)="addToCart(Product)" (load) = "getValues(Product._id)" class="btn btn-primary w-100">Add to cart</button>
+      <div *ngIf = "productId == Product._id">
+          {{ hiiii }}
+      </div>
+    </div>

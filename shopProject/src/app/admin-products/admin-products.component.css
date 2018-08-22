@@ -1,0 +1,12 @@
+.List{
+  width: 80%;
+  float: left;
+}
+.ListImage{
+  width: 20%;
+  float: right;
+}
+.ImageSize{
+  width:100%;
+  height:130px;
+}

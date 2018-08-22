@@ -1,0 +1,32 @@
+<div class="container" style="width:40%;" >
+  <p class="alert alert-danger" *ngIf ="disabled">Email Already Exist</p>
+  <form ngForm #f=ngForm>
+    <p class="alert alert-warning" align="center">SignUp</p>
+   <div class="form-group">
+    <label for="">Name </label>
+     <input type="textbox" required minlength = "5" class="form-control" name="name" [(ngModel)] ="name"  #nameField="ngModel" >
+     <div class ="alert alert-danger" *ngIf="nameField.errors?.minlength && (nameField.dirty || nameField.touched)">Minimum 5 character is needed</div>
+    <div class ="alert alert-danger" *ngIf="nameField.errors?.required && (nameField.dirty || nameField.touched)">Name is required</div>
+   </div>
+   <div class="form-group">
+   <label for="">Email</label> <!-- -->
+     <input type="textbox" name="email" [(ngModel)] = "email" ngModel #emailField="ngModel"  class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+     <div class ="alert alert-danger" *ngIf="emailField.errors?.pattern && (emailField.dirty || emailField.touched)">Email is invalid</div>
+    <div class ="alert alert-danger" *ngIf="emailField.errors?.required && (emailField.dirty || emailField.touched)">Email is required</div>
+ </div>
+ <div class="form-group">
+   <label for="">Password</label>
+     <input type="password" name="Pass" [(ngModel)] = "Pass" ngModel #passField="ngModel"  class="form-control" minlength="6" required>
+    <div class ="alert alert-danger" *ngIf="passField.errors?.required && (passField.dirty || passField.touched)">Password required</div>
+    <div class ="alert alert-danger" *ngIf="passField.errors?.minlength && (passField.dirty || passField.touched)">Weak Password</div>
+ </div>
+ <div class="form-group">
+   <label for="">Confirm Password</label>
+     <input type="password" name="ConfirmPass" [(ngModel)] = "ConfirmPass" ngModel #confirmField="ngModel" class="form-control" required>
+  <div class ="alert alert-danger" *ngIf="(confirmField.errors?.required && (confirmField.dirty || confirmField.touched))" >Confirm Password required</div>
+  <div class ="alert alert-danger" *ngIf="passMatch" >Password doesn't match</div>
+ </div>
+  <input type="button" class="btn btn-primary" value="SignUp" (click) = "onSubmit()" [disabled] ="f.invalid">
+  </form>
+  <a routerLink="/login" class="alert-link">Already have an account</a>
+</div>

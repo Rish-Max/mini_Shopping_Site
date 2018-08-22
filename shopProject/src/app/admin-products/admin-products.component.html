@@ -1,0 +1,45 @@
+<div style="padding:40px">
+     <button class="btn btn-primary" routerLink="/admin/products/new">Add New Products</button>
+      <div class="input-group form-group" style="padding-top:5px">
+         <input (keyup)="search(qwery)"  #qwery type="text" class="form-control" placeholder="Search..." aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-default" (click)="sortByValue()" >$</button>
+          <button class="btn btn-default" (click)="sortByName()" >A->Z</button>
+          <button class="btn btn-default" (click)="reverseByName()" >Z->A</button>
+        </div>
+    </div>
+  <div class="row" style="padding:10px" >
+    <div class="col-md-auto col-sm-auto" style="padding:5px;" *ngFor="let product of filterProducts">
+      <div class="card" style="width:15rem;padding:10px;" >
+        <img class="card-img-top" src="https://rishabh-images.s3.amazonaws.com/{{ product.imagePath }}" class="ImageSize" style="border-bottom:0.01px solid #dee2e6">
+        <div class="card-body">
+          <div class="List">
+            <h5 class="card-title">{{ product.title }}</h5>
+            <p class="card-text">{{ product.price|currency :'USD':true }}</p>
+          </div>
+          <div class="ListImage">
+            <a class="btn btn-primary" [routerLink]="['/admin/products',product._id]">Edit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div style="padding-top:25px">
+  <table class="table">
+    <thead>
+      <tr align="">
+        <th>Product name</th>
+        <th>Item Type </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let product of products">
+      <tr>
+        <td>{{ product.title }}</td>
+        <td>{{ product.price }}</td>
+        <td><a [routerLink]="['/admin/products',product._id]">Edit</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->

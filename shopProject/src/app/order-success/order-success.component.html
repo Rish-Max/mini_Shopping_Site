@@ -1,0 +1,27 @@
+
+<div class="container">
+  <div class="card" style="width: 50rem;padding : 20px">
+     <h1>Order Placed</h1>
+     <p>Address:-{{ shipping.addressLine1 }}{{ shipping.addressLine2 }},{{ shipping.city }}</p>
+    <div class="card-body">
+       <table class="table">
+         <thead>
+           <th class="text-right">Title</th>
+           <th class="text-center">Quantity</th>
+           <th >Price</th>
+           <th>TotalQuantity</th>
+         </thead>
+         <tbody >
+           <tr *ngFor="let product of products">
+             <td class="text-right">{{ product.title }}</td> 
+             <td class="text-center">{{ product.quantity}}</td>
+             <td >{{ product.price}}</td>
+             <td >{{ product.quantity * product.price}}</td>
+           </tr>
+        </tbody>
+       </table> 
+      <a routerLink='/' class="btn btn-primary">Go Back to home</a>
+    </div>
+  </div>
+</div>
+

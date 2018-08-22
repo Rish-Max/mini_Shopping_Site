@@ -1,0 +1,19 @@
+<div class="container" style="width:40%;">
+  <form ngForm #f=ngForm>
+    <p class="alert alert-warning" align="center">Login</p>
+    <div class="form-group">
+      <label for="">Email</label>
+      <input type="textbox" name="email" [(ngModel)]="email" #First="ngModel" pattern="" required class="form-control">
+      <div class="alert alert-danger" *ngIf="First.errors?.required && (First.touched|| First.dirty)">Email required</div>
+      <div class="alert alert-danger" *ngIf="First.errors?.pattern && (First.touched || First.dirty)">Invalid Email</div>
+    </div>
+    <div class="form-group">
+      <label for="">Password</label>
+      <input type="password" name="Pass" [(ngModel)]="Pass" #Second="ngModel" required class="form-control" >
+      <div class="alert alert-danger" *ngIf="Second.errors?.required && (Second.touched || Second.dirty)">Password Required</div>
+    </div>
+    <input type="button" class="btn btn-primary" value="Login" [disabled]="!f.valid" (click)="onSubmit()">
+    <div class="alert alert-danger" *ngIf="passCheck">Incorrect Password</div>
+    <div class="alert alert-danger" *ngIf="userCheck">No Such User Exist</div>
+  </form><a routerLink="/signUp" class="alert-link">Create an account</a>
+</div>

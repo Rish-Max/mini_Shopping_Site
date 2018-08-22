@@ -1,0 +1,62 @@
+<div class="row" style="padding:10px">
+  <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+<h2>Shipping</h2>
+<form ngForm #f=ngForm>
+  <div class="form-group">
+    <label for="">Name</label>
+    <input #name=ngModel name="name" [(ngModel)]="shipping.name" type="text" class="form-control" required>
+    <div  *ngIf="name.touched || name.dirty">
+      <div class="alert alert-danger" *ngIf="name.errors?.required">Name is required.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="">Address</label>
+    <input #addressLine1=ngModel name="addressLine1" [(ngModel)]="shipping.addressLine1" type="text" class="form-control" placeholder="Line 1" required>
+    <div *ngIf="addressLine1.touched || addressLine1.dirty">
+      <div class="alert alert-danger" *ngIf="addressLine1.errors?.required">Address Line 1 is required.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for=""></label>
+    <input #addressLine2=ngModel name="addressLine2" [(ngModel)]="shipping.addressLine2" type="text" class="form-control" placeholder="Line 2" required>
+    <div *ngIf="addressLine2.touched || addressLine2.dirty">
+      <div class="alert alert-danger" *ngIf="addressLine2.errors?.required">Address Line 2 is required.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="">City</label>
+    <input #city=ngModel name="city" [(ngModel)]="shipping.city" type="text" class="form-control" required>
+    <div *ngIf="city.touched || city.dirty">
+      <div class="alert alert-danger" *ngIf="city.errors?.required">City is required.</div>
+    </div>
+  </div>
+    <input type="button" class="btn btn-primary" value="Place Order" [disabled]="f.invalid" (click)="placeOrder()">
+  </form>
+  </div>
+  <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+    <div class="card" style="margin-top: 10%">
+    <div class="card-body">
+      <h4>Order Summary</h4>
+      <p class="card-text"> You have {{ totalQuantity }} items in ur Shopping cart</p>
+        <ul class="list-group list-group-flush" >
+        <div *ngFor="let order of orderList">
+          <li class="list-group-item" *ngIf="order.quantity > 0" style= "padding: 10px; margin-bottom: 20px">
+            <div>
+              <div>
+                  <div style="float:left;width:50%">{{ order.quantity }} x {{ order.title }}</div>
+                  <div style="float:right;width:50%">{{ (order.quantity * order.price) | currency }}</div>
+              </div>
+            </div>
+          </li>
+        </div>
+        <li class="list-group-item font-weight-bold">
+          <div>
+              <div style="float:left;width:50%"> Total </div>
+              <div style="float:right;width:50%"> {{ totalAmount | currency }} </div>
+          </div>
+        </li>
+        </ul>
+    </div>
+  </div>
+</div>
+</div>

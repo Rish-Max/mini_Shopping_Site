@@ -1,0 +1,54 @@
+ <div class="start">
+<div class="row">
+  <div class="col-12 col-lg-3 col-xl-3"id="categorySection" >
+
+      <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample" *ngIf="showButton">
+      Show categories
+      </button>
+    <ul class="list-group" id="collapseExample" [ngbCollapse]="isCollapsed" id="category">
+      <li class="list-group-item list-group-item-action"
+      [class.active] = "type == null"
+      routerLink="/"
+      id="allCategories">
+        All Categories
+      </li>
+      <li class="list-group-item list-group-item-action"
+      [class.active] = "category.type == type"
+      routerLink="/" [queryParams]="{category : category.type }"
+      *ngFor="let category of categories"
+      [id]="category.type"
+      >
+          {{ category.name.substr(0,1)|uppercase }}{{category.name.substr(1)}}
+      </li>
+    </ul>
+    
+  </div>
+  
+  <div class="col-12 col-lg-9 col-xl-9">
+    
+    <div class="row sticky-header">
+      <div class="col-12 col-sm-6 cd-md-6 col-lg-4 col-xl-4" *ngFor="let Product of filterProduct" style="padding-bottom:10px" >
+        <div class="card" >
+          <img class="card-img-top ImageSize" src="https://rishabh-images.s3.amazonaws.com/{{Product.imagePath}}" style="border-bottom:0.01px solid #dee2e6">
+          <div class="card-body">
+            <h5 class="card-title">{{ Product.title }}</h5>
+            <p class="card-text">{{ Product.price|currency }}</p>
+          </div>
+          <div class="card-footer" style="padding:0px">
+            <div *ngFor="let quant of Quantity">
+              <div *ngIf="quant.productId == Product._id">
+                <div class="row " *ngIf="(quant.quantity !== 0 && '0'); else elseBlock">
+                         <div class="col"><button type="button" (click)="removeProduct(Product)" class="btn btn-danger btn-block w-100">-</button></div>
+                         <div class="col text-justify"><p>{{quant.quantity}} item</p></div>
+                         <div class="col"><button type="button" (click)="addToCart(Product)" class="btn btn-warning btn-block w-100">+</button></div>
+                 </div>
+                <ng-template #elseBlock><button type="button" (click)="addToCart(Product)" class="btn btn-primary w-100">Add to cart</button></ng-template>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

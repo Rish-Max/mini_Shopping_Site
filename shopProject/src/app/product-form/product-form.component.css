@@ -1,0 +1,10 @@
+.ImageSize{
+  width:100%;
+  height:230px;
+}
+
+@media(max-width:768px){
+  #head{
+    padding : 20px;
+  }
+}

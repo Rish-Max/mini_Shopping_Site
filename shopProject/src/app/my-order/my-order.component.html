@@ -1,0 +1,57 @@
+<div class="container" id="head">
+    <h1 class="alert alert-success text-center">Order List</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 w-100" *ngFor="let order of Orderlist;let i=index" style="padding:4px">
+            <div class="container">
+                <div class="card" style="padding:10px;" id="orderCard">
+                  <h1>Order {{ i+1 }}</h1>
+                    <div class="card-body">
+                      <div class="List">
+                        <h5 class="card-title">{{ order.date | date:'fullDate' }}</h5>
+                      <div>
+                          <button [id]="order._id" (click) = "showOrder($event,content)" >View details</button>
+                           <ng-template #content let-c="close" let-d="dismiss">
+                              <div class="modal-header">
+                                <h2 class="modal-title">Order Details</h2>
+                                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <h3>Shipping Address</h3>
+                                <p>Name:-{{ shipping.name }}</p>
+                                <p>Address:-{{ shipping.addressLine1 }}{{ shipping.addressLine2 }},{{ shipping.city }}</p>                            
+                                <h3>Order Table</h3>
+                                <table class = "table">
+                                   <thead>
+                                     <th> Product</th>
+                                    <th> Price</th>
+                                    </thead>
+                                   <tbody>
+                                     <tr *ngFor="let product of products">
+                                       <td>{{ product.quantity}} x {{product.title }}</td>
+                                       <td>{{ product.quantity*product.price|currency }}</td>
+                                     </tr>
+                                   </tbody>
+                                   <tfoot>
+                                     <tr>
+                                       <td></td>
+                                       <td>{{ totalAmount|currency }}</td>
+                                     </tr>
+                                   </tfoot>  
+                                 </table>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
+                              </div>
+                           </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+         </div>
+       </div>
+      </div>    
+</div>
